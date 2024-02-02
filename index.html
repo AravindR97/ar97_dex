@@ -100,68 +100,7 @@
         .mybox > li > h2.done {
             text-decoration:line-through
         }
-    </style>
-    <script>
-        //$(document).ready(function () {
-            //show_pkmn();
-        //});
-        function show_pkmn(){
-           $('#pkmn-list').empty()
-            $.ajax({
-                type: "GET",
-                url: "/pkmn",
-                data: {},
-                success: function (response) {
-                    let rows = response['pkmns']
-                    for (let i = 0; i < rows.length; i++) {
-                        let name = rows[i]['pkmn']
-                        let typ = rows[i]['type']
-                        let ability = rows[i]['ability'][0]
-                        let image = rows[i]['img']
-
-                        let temp_html = `<div class="col">
-                                            <div class="mycards">
-                                                <div class="card" style="width: 15rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
-                                                    <img src= ${image} class="card-img-top" alt="...">
-                                                    <div class="card-body">
-                                                    <h5 class="card-title">${name}</h5>
-                                                    <p class="card-text"> Type: ${typ} </p>
-                                                    <p class="card-text"> Abilities: ${ability} </p>
-                                                    <a href="#" onclick="delete_pkmn('${name}')" class="btn btn-danger">Release</a> 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>`
-                        
-                        $('#pkmn-list').append(temp_html)
-                    }
-                }
-            });
-        }
-        function save_pkmn(){
-            let name = $('#pkmn').val()
-            $.ajax({
-                type: "POST",
-                url: "/pkmn",
-                data: {"pkmn_give":name},
-                success: function (response) {
-                    alert(response["msg"])
-                    window.location.reload()
-                }
-            });
-        }
-        function delete_pkmn(name){
-            $.ajax({
-                type: "POST",
-                url: "/delete",
-                data: { "name_give": name},
-                success: function (response) {
-                    alert(response["msg"]);
-                    window.location.reload();
-                }
-            });
-        }
-    </script>    
+    </style>    
 </head>
 <body>
     <div class="mypic">
@@ -170,7 +109,7 @@
     <div class="mybox">
         <div class="mybucket">
             <input id="pkmn" class="form-control" type="text" placeholder="Search the Pokemon here">
-            <button onclick="save_pkmn()" type="button" class="btn btn-outline-danger">Capture</button>
+            <button type="button" class="btn btn-outline-danger">Capture</button>
         </div>
     </div>
     <div class="container" style="margin-bottom: 0%; padding-bottom: 10px; padding-top: 10px; background: rgba(0, 0, 0, 0);">
@@ -183,7 +122,7 @@
                       <h5 class="card-title">"Ditto"</h5>
                       <p class="card-text"> Type:"Normal" </p>
                       <p class="card-text"> Abilities:"Imposter" </p>
-                      <a href="#" onclick="order()" class="btn btn-danger">Release</a> 
+                      <a href="#" class="btn btn-danger">Release</a> 
                     </div>
                 </div>
             </div>
@@ -196,7 +135,7 @@
                       <h5 class="card-title">"Ditto"</h5>
                       <p class="card-text"> Type:"Normal" </p>
                       <p class="card-text"> Abilities:"Imposter" </p>
-                      <a href="#" onclick="delete_pkmn()" class="btn btn-danger">Release</a> 
+                      <a href="#" class="btn btn-danger">Release</a> 
                     </div>
                 </div>
             </div>
@@ -209,7 +148,7 @@
                       <h5 class="card-title">"Ditto"</h5>
                       <p class="card-text"> Type:"Normal" </p>
                       <p class="card-text"> Abilities:"Imposter" </p>
-                      <a href="#" onclick="delete_pkmn()" class="btn btn-danger">Release</a> 
+                      <a href="#" class="btn btn-danger">Release</a> 
                     </div>
                 </div>
             </div>
@@ -222,7 +161,7 @@
                       <h5 class="card-title">"Ditto"</h5>
                       <p class="card-text"> Type:"Normal" </p>
                       <p class="card-text"> Abilities:"Imposter" </p>
-                      <a href="#" onclick="delete_pkmn()" class="btn btn-danger">Release</a> 
+                      <a href="#" class="btn btn-danger">Release</a> 
                     </div>
                 </div>
             </div>
