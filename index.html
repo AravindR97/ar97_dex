@@ -102,11 +102,11 @@
         }
     </style>
     <script>
-        $(document).ready(function () {
-            show_pkmn();
-        });
+        //$(document).ready(function () {
+            //show_pkmn();
+        //});
         function show_pkmn(){
-            $('#pkmn-list').empty()
+           $('#pkmn-list').empty()
             $.ajax({
                 type: "GET",
                 url: "/pkmn",
