@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css2?family=Gowun+Dodum&display=swap" rel="stylesheet">
+
+    <!-- Copy begins here -->
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playpen+Sans&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap" rel="stylesheet">
+
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <!-- copy ends here -->
+
+    <title>PokeDex</title>
+
+    <style>
+        * {
+            font-family: 'Gowun Dodum', sans-serif;
+        }
+        .mypic {
+            width: 100%;
+            height: 200px;
+
+            background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('https://wallpapers.com/images/featured/pokemon-va6139eg5csznzmw.jpg');
+            background-position: center;
+            background-size: cover;
+
+            color: white;
+
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .mypic > h1 {
+            font-size: 30px;
+        }
+        .mybox {
+            width: 95%;
+            max-width: 700px;
+            padding: 20px;
+            box-shadow: 0px 0px 10px 0px lightcoral;
+            margin: 20px auto;
+        }
+        .mybucket {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .mybucket > input {
+            width: 70%;
+        }
+        .mybox > li {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+
+            margin-bottom: 10px;
+            min-height: 48px;
+        }
+        .mybox > li > h2 {
+            max-width: 75%;
+            font-size: 20px;
+            font-weight: 500;
+            margin-right: auto;
+            margin-bottom: 0px;
+        }
+        .mybox > li > h2.done {
+            text-decoration:line-through
+        }
+    </style>
+    <script>
+        $(document).ready(function () {
+            show_pkmn();
+        });
+        function show_pkmn(){
+            $('#pkmn-list').empty()
+            $('#pkmn-total').empty()
+            $.ajax({
+                type: "GET",
+                url: "/pkmn",
+                data: {},
+                success: function (response) {
+                    let rows = response['pkmns']
+                    let total_html = `<p>Total Pokemon Caught: ${rows.length}</p>`
+                    $('#pkmn-total').append(total_html)
+                    for (let i = 0; i < rows.length; i++) {
+                        let name = rows[i]['pkmn']
+                        let typ = rows[i]['type']
+                        let ability = rows[i]['ability'][0]
+                        let image = rows[i]['img']
+
+                        let temp_html = `<div class="col">
+                                            <div class="mycards">
+                                                <div class="card" style="width: 15rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                                                    <img src= ${image} class="card-img-top" alt="...">
+                                                    <div class="card-body">
+                                                    <h5 class="card-title">${name}</h5>
+                                                    <p class="card-text"> Type: ${typ} </p>
+                                                    <p class="card-text"> Abilities: ${ability} </p>
+                                                    <a href="#" onclick="delete_pkmn('${name}')" class="btn btn-danger">Release</a> 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>`
+                        
+                        $('#pkmn-list').append(temp_html)
+                    }
+                }
+            });
+        }
+        function save_pkmn(){
+            let name = $('#pkmn').val()
+            $.ajax({
+                type: "POST",
+                url: "/pkmn",
+                data: {"pkmn_give":name},
+                success: function (response) {
+                    alert(response["msg"])
+                    window.location.reload()
+                }
+            });
+        }
+        function delete_pkmn(name){
+            $.ajax({
+                type: "POST",
+                url: "/delete",
+                data: { "name_give": name},
+                success: function (response) {
+                    alert(response["msg"]);
+                    window.location.reload();
+                }
+            });
+        }
+    </script>
+</head>
+<body>
+    <div class="mypic">
+        <a href="https://fontmeme.com/bend-images/"><img src="https://fontmeme.com/permalink/240202/17fa92c7433f463f29c1744023ffcaaa.png" alt="bend-images" border="0"></a>
+    </div>
+    <div class="mybox">
+        <div class="mybucket">
+            <input id="pkmn" class="form-control" type="text" placeholder="Search the Pokemon here">
+            <button onclick="save_pkmn()" type="button" class="btn btn-outline-danger">Capture!</button>
+        </div>
+    </div>
+    <div id="pkmn-total" style="text-align: center;">
+        <p>Total Pokemon Caught:</p>
+    </div>
+    <div class="container" style="margin-bottom: 0%; padding-bottom: 10px; padding-top: 10px; background: rgba(0, 0, 0, 0);">
+        <div class="row" id="pkmn-list">
+          <div class="col">
+            <div class="mycards">
+                <div class="card" style="width: 15rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img src="https://www.bunnycart.com/pub/media/catalog/product/cache/a28d3c098923930b60afe6318be0b5fd/g/l/glow_zebra_danios.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">"Name Here"</h5>
+                      <p class="card-text"> Type:"Type Here" </p>
+                      <p class="card-text"> Abilities:"Abilities Here" </p>
+                      <a href="#" onclick="order()" class="btn btn-danger">Release</a> 
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mycards">
+                <div class="card" style="width: 15rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img src="https://www.bunnycart.com/pub/media/catalog/product/cache/a28d3c098923930b60afe6318be0b5fd/g/l/glow_zebra_danios.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">"Name Here"</h5>
+                      <p class="card-text"> Type:"Type Here" </p>
+                      <p class="card-text"> Abilities:"Abilities Here" </p>
+                      <a href="#" onclick="delete_pkmn()" class="btn btn-danger">Release</a> 
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mycards">
+                <div class="card" style="width: 15rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img src="https://www.bunnycart.com/pub/media/catalog/product/cache/a28d3c098923930b60afe6318be0b5fd/g/l/glow_zebra_danios.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">"Name Here"</h5>
+                      <p class="card-text"> Type:"Type Here" </p>
+                      <p class="card-text"> Abilities:"Abilities Here" </p>
+                      <a href="#" onclick="delete_pkmn()" class="btn btn-danger">Release</a> 
+                    </div>
+                </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="mycards">
+                <div class="card" style="width: 15rem; box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);">
+                    <img src="https://www.bunnycart.com/pub/media/catalog/product/cache/a28d3c098923930b60afe6318be0b5fd/g/l/glow_zebra_danios.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">"Name Here"</h5>
+                      <p class="card-text"> Type:"Type Here" </p>
+                      <p class="card-text"> Abilities:"Abilities Here" </p>
+                      <a href="#" onclick="delete_pkmn()" class="btn btn-danger">Release</a> 
+                    </div>
+                </div>
+            </div>
+          </div>
+        </div>        
+    </div>
+</body>
+</html>
