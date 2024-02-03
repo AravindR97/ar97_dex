@@ -5,8 +5,7 @@ Your own personal PokeDex where you can catch pokemon and store details regardin
 
 ## Demo
 
-
-https://github.com/AravindR97/ar97_dex/assets/132665408/67cd2856-1620-4c4f-88e2-a00d50d62154
+https://github.com/AravindR97/ar97_dex/assets/132665408/d32a3625-88e4-4497-b2f9-31c6a80e29fa
 
 
 
