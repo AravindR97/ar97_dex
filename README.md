@@ -3,6 +3,13 @@
 ## Description
 Your own personal PokeDex where you can catch pokemon and store details regarding them. The details of the captured pokemon will be displayed as cards in the App. It also icludes the option to delete any pokemon.
 
+## Demo
+
+
+https://github.com/AravindR97/ar97_dex/assets/132665408/67cd2856-1620-4c4f-88e2-a00d50d62154
+
+
+
 The following tasks were done as part of this project:
   1. Developed the frontend using HTML, Javascript and CSS.
   2. Created server using Python web framework Flask
